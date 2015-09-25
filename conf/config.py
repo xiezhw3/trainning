@@ -1,0 +1,9 @@
+
+
+REDIS_ADDR='redis'
+REDIS_PORT=6379
+
+APP_HOST='0.0.0.0'
+APP_PORT=80
+
+DEBUG = True

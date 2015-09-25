@@ -1,0 +1,9 @@
+web:
+  image: docker-demo
+  ports:
+   - "8123:80"
+  links:
+   - redis
+
+redis:
+  image: redis
