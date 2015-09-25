@@ -1,9 +1,9 @@
 web:
-  image: docker-demo
+  image: 223.252.222.167:5000/trainning/docker-demo:20150925.2
   ports:
    - "8123:80"
   links:
-   - redis
+   - redis:redis
 
 redis:
   image: redis
