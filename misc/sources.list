@@ -1,8 +1,4 @@
-deb http://ftp.cn.debian.org/debian/ wheezy main non-free contrib
-deb http://ftp.cn.debian.org/debian/ wheezy-updates main non-free contrib
-deb http://ftp.cn.debian.org/debian/ wheezy-backports main non-free contrib
-deb-src http://ftp.cn.debian.org/debian/ wheezy main non-free contrib
-deb-src http://ftp.cn.debian.org/debian/ wheezy-updates main non-free contrib
-deb-src http://ftp.cn.debian.org/debian/ wheezy-backports main non-free contrib
-deb http://ftp.cn.debian.org/debian-security/ wheezy/updates main non-free contrib
-deb-src http://ftp.cn.debian.org/debian-security/ wheezy/updates main non-free contrib
+deb http://mirrors.aliyun.com/debian/ wheezy main non-free contrib
+deb http://mirrors.aliyun.com/debian/ wheezy-proposed-updates main non-free contrib
+deb-src http://mirrors.aliyun.com/debian/ wheezy main non-free contrib
+deb-src http://mirrors.aliyun.com/debian/ wheezy-proposed-updates main non-free contrib
