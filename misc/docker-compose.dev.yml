@@ -1,0 +1,9 @@
+api:
+    volumes:
+     - ${PWD}/code/:/code
+     - ${PWD}/conf:/conf
+
+server:
+    volumes:
+     - ${PWD}/code/:/code
+     - ${PWD}/conf:/conf

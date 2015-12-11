@@ -1,10 +1,16 @@
-web:
-  image: 223.252.222.167:5000/trainning/docker-demo:20150925.2
-  ports:
-   - "8123:80"
-  links:
-   - redis:redis
+mongo:
+    image: xiezhw3/mongo
+    command: --smallfiles
+api:
+    image: xiezhw3/training:1.0
+    links:
+     - mongo:mongodb
+    ports:
+     - "5000:5000"
+    command: python -m code api
 
-redis:
-  image: redis
-
+server:
+    image: xiezhw3/training:1.0
+    links:
+        - mongo:mongodb
+    command: python -m code server

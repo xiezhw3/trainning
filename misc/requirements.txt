@@ -1,2 +1,5 @@
+docopt
 flask
 redis
+psutil
+pymongo
