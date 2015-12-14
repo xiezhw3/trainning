@@ -1,8 +1,8 @@
 mongo:
-    image: xiezhw3/mongo
+    image: dockerhub.nie.netease.com/gzxiezhiwang/mongo:1.0
     command: --smallfiles
 api:
-    image: xiezhw3/training:1.0
+    image: dockerhub.nie.netease.com/gzxiezhiwang/training:1.0
     links:
      - mongo:mongodb
     ports:
@@ -10,7 +10,7 @@ api:
     command: python -m code api
 
 server:
-    image: xiezhw3/training:1.0
+    image: dockerhub.nie.netease.com/gzxiezhiwang/training:1.0
     links:
         - mongo:mongodb
     command: python -m code server
