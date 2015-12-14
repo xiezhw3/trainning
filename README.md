@@ -105,12 +105,7 @@ $ chmod +x /usr/local/bin/docker-compose
 ```
 $ docker-compose -p code -f misc/docker-compose.yml up
 ```
-来启动容器。因为 mongo 启动完成会比 server 模块慢，所以第一次启动可能会因为 mongo 还没完全启动使得 server 运行失败，这时直接运行：
-```
-$ docker restart code_server_1
-```
-来重新启动 server 即可
-
+来启动容器。因为 mongo 启动完成会比 server 模块慢，所以第一次启动可能会因为 mongo 还没完全启动使得 server 运行失败，已经在 docker-compose 里面加入自动重启机制，所以只需要等待一段时间整个系统就会正常运行。
 
 ### Contact
 

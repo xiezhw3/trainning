@@ -1,6 +1,8 @@
 mongo:
     image: dockerhub.nie.netease.com/gzxiezhiwang/mongo:1.0
     command: --smallfiles
+    restart: always
+
 api:
     image: dockerhub.nie.netease.com/gzxiezhiwang/training:1.0
     links:
@@ -8,9 +10,11 @@ api:
     ports:
      - "5000:5000"
     command: python -m code api
+    restart: always
 
 server:
     image: dockerhub.nie.netease.com/gzxiezhiwang/training:1.0
     links:
         - mongo:mongodb
     command: python -m code server
+    restart: always
