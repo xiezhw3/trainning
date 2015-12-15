@@ -17,4 +17,5 @@ ADD ./conf /conf
 ADD ./scripts/run.sh  /run.sh
 
 WORKDIR /
+EXPOSE 5000
 CMD ["python", "-m", "code", "server"]
