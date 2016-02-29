@@ -24,11 +24,16 @@
     agent-ui：web 前端部分
 
 ## 系统运行方式
-直接在 `agent-server` 目录下面运行如下命令启动服务
+在 agent-server 目录下运行如下命令：
+```
+$ TAG=1.0 && bash scripts/run.sh [build|start|stop]
+```
+这个启动文件会直接启动整个系统，如果需要直接控制某个子系统可以通过脚本 `docker-run.sh` 来进行。使用方式可以通过运行
+```
+$ bash scripts/docker-run.sh
+```
+来进行了解
 
-```
-$ docker-compose -p agent -f misc/compose/docker-compose.yml up -d
-```
 在 docker-compsoe 文件里面我设置了 server1 和 server2 两个 agent，需要增加 agent 直接在 compose 文件增加即可。
 
 ## 查看方式

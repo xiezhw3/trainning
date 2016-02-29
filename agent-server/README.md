@@ -100,7 +100,7 @@ $ chmod +x /usr/local/bin/docker-compose
 ```
 
 #### 运行方式
-在 training 目录下运行如下命令：
+在 agent-server 目录下运行如下命令：
 ```
 $ TAG=1.0 && bash scripts/run.sh [build|start|stop]
 ```
