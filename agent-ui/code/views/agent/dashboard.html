@@ -1,0 +1,66 @@
+<div class="jumbotron container">
+<div class="dropdown col-md-5">
+    <a class="dropdown-toggle"
+        id="dropdown2"
+        role="button"
+        data-toggle="dropdown"
+        data-target="#"
+        href="#">
+    <div class="input-group">
+       <input type="text"
+       class="form-control"
+       ng-model="fromdata.data"
+       placeholder="Start">
+            <span class="input-group-addon">
+                <i class="glyphicon glyphicon-calendar"></i>
+            </span>
+    </div>
+  </a>
+  <ul class="dropdown-menu"
+    role="menu"
+    aria-labelledby="dLabel">
+    <datetimepicker
+        data-ng-model="fromdata.data"
+        data-on-set-time="fromTimeOnTimeSet(newDate, oldDate)"
+        data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+  </ul>
+</div>
+
+<div class="dropdown col-md-5">
+    <a class="dropdown-toggle"
+        id="dropdown3"
+        role="button"
+        data-toggle="dropdown"
+        data-target="#"
+        href="#">
+    <div class="input-group">
+       <input type="text"
+       class="form-control"
+       ng-model="todata.data"
+       placeholder="End">
+            <span class="input-group-addon">
+                <i class="glyphicon glyphicon-calendar"></i>
+            </span>
+    </div>
+  </a>
+  <ul class="dropdown-menu"
+    role="menu"
+    aria-labelledby="dLabel">
+    <datetimepicker
+        data-ng-model="todata.data"
+        data-on-set-time="toTimeOnTimeSet (newDate, oldDate)"
+        data-datetimepicker-config="{ dropdownSelector: '#dropdown3' }"/>
+  </ul>
+</div>
+</div>
+<div class="container">
+    <div class="col-lg-5 col-sm-12 ng-scope" ng-repeat="dataType in dataTypes">
+        <div class="panel panel-default" >
+            <div class="chart-container">
+            <highchart id="dataType"
+                       config="highchartsNG[dataType]"
+                       class="span10"></highchart>
+            </div>
+        </div>
+    </div>
+</div>

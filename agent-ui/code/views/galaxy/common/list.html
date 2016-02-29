@@ -1,0 +1,75 @@
+<div class="ibox-toolbar clear">
+    <op-pager total-items='listTotal' 
+        items-per-page='filters.num' ng-model='filters.page'
+        class="pull-right">
+    </op-pager>
+    <button class="btn btn-primary btn-outline btn-sm" type="button"
+        ui-sref=".detail({id: 0})" 
+        ng-disabled="config.editor">
+        <i class="fa fa-plus"></i>
+        <span class="hidden-xs">添加<span>
+    </button>
+    <div class="btn-group open" dropdown="">
+        <button type="button" 
+            ng-disabled="config.editor"
+            dropdown-toggle="" aria-haspopup="true" aria-expanded="true"
+            class="btn btn-info btn-outline btn-sm dropdown-toggle hidden-xs">
+            <i class="fa fa-mail-forward"></i> 导入</button>
+        <ul class="dropdown-menu" role="menu">
+            <li><a href="#">导入群组</a></li>
+            <li><a href="#">导入配置组</a></li>
+            <li><a href="#">导入参数</a></li>
+            <li class="divider"></li>
+            <li><a href="#">群组和机器</a></li>
+            <li><a href="#">群组与分区</a></li>
+            <li><a href="#">群组与配置组</a></li>
+            <li><a href="#">群组排列信息</a></li>
+        </ul>
+    </div>
+    <li class="divider-vertical hidden-xs"></li>
+    <select class="input-sm"
+        ng-model="config.editor" 
+        ng-options="editor.label for editor in config.listEditors">
+        <option value="" selected disabled>批量操作...</option>
+    </select>
+
+    <div class="btn-group">
+        <!--label class="btn btn-sm btn-outline btn-default active" 
+            ng-model="formScope" btn-radio="'selected'">
+               {{ data.items._selected || 0}}</label-->
+        <label class="btn btn-sm btn-outline btn-default" 
+            ng-model="formScope" bs-radio value="filtered">
+                {{ listTotal || 0}}</label>
+        <label class="btn btn-sm btn-outline btn-default" 
+            ng-model="formScope" bs-radio value="selected">
+                {{ selected.length || 0}}</label>
+    </div>
+    <op-form ng-show="config.editor.fields"
+        on-cancel="cancelEdit()"
+        on-submit="batchEdit()"
+        form-defs="config.editor.fields"
+        form-keep="config.keepEditor"
+        form-data="values"
+        form-mode="set"
+        form-scope="formScope"
+        list-selected="selected.length"
+        list-total="listTotal">
+    </op-form>
+</div>
+
+<div class="row">
+<div class="col-lg-12">
+    <div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <table op-grid
+            list-total="listTotal"
+            items="data.items" 
+            config="config" 
+            filters="filters" 
+            selected="selected">
+        </table>
+    </div><!-- content -->
+    </div>
+</div>
+</div>
+

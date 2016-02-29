@@ -1,0 +1,130 @@
+<form class='form-inline'
+    ng-class='{"form-filter": config.disabledFormBorder != true}'>
+<div style='padding:0 10px 10px 0'
+    ng-repeat="filterItem in config.filterDefs"
+    class="form-group {{filterItem.class}}"
+    ng-switch="filterItem.filterType"
+    >
+    <div ng-switch-when="options" style='{{ filterItem.style }}' ng-init='loadOptions(filterItem)'>
+        <label>{{filterItem.label | translate}}</label>
+        <select class='form-control'
+            style='width:130px;'
+            ng-init='filters[filterItem.name] = filterItem.defaultValue'
+            ng-model='filters[filterItem.name]'
+            ng-options='item.id as item.label | translate for item in filterItem.options'>
+            <option ng-if='filterItem.nullable' value=''
+                label='{{ "ALL" | translate }}'>
+                {{ "ALL" | translate }}
+            </option>
+        </select>
+    </div>
+    <div ng-switch-when="multiOptions"
+        ng-init='loadOptions(filterItem)'
+        class='multi-options'>
+        <label>{{filterItem.label | translate}}</label>
+        <button type='button' class='form-control btn'
+            ng-init='filters[filterItem.name] = filterItem.defaultValue'
+            style='width:130px;'
+            ng-model='filters[filterItem.name]'
+            data-multiple='1' data-all-none-buttons='1'
+            placeholder="{{ 'CHOOSE' | translate }}"
+            bs-select
+            ng-options='item.id as item.label | translate for item in filterItem.options'>
+        </button>
+        <select class='form-control'
+            style='width:130px;'
+            ng-init='multiConditionItem = config.fields[filterItem.multiCondition]; filters[multiConditionItem.name] = multiConditionItem.defaultValue'
+            ng-model='filters[multiConditionItem.name]'
+            ng-options='item.id as item.label | translate for item in multiConditionItem.options'
+            ng-if='filterItem.multiCondition'>
+            <option ng-if='multiConditionItem.nullable' value=''
+                label='{{ "ALL" | translate }}'>
+                {{ "ALL" | translate }}
+            </option>
+        </select>
+    </div>
+    <div ng-switch-when="groupOptions" style='{{ filterItem.style }}'
+        ng-init='loadOptions(filterItem)'>
+        <label>{{filterItem.label | translate}}</label>
+        <select chosen class='form-control chosen-select'
+            style='width:130px;'
+            ng-model='filters[filterItem.name]'
+            ng-init='filters[filterItem.name] = filterItem.defaultValue'
+            ng-options='item.id as item.label group by item.group for item in filterItem.options'>
+                <option ng-if='filterItem.nullable'
+                    value='' label='{{ "ALL" | translate }}'>
+                    {{ "ALL" | translate }}
+                </option>
+        </select>
+    </div>
+    <div ng-switch-when="date">
+        <label>{{filterItem.label | translate}}</label>
+        <input type="text"
+            ng-init='filters[filterItem.name] = filterItem.defaultValue'
+            ng-model='filters[filterItem.name]'
+            class="form-control" size="10"
+            bs-datepicker
+            data-max-date='{{ filterItem.maxDate }}'
+            data-date-format="{{filterItem.dateFormat}}" />
+    </div>
+    <div ng-switch-when="time">
+        <label>{{filterItem.label | translate}}</label>
+        <select class='form-control' ng-init='filters[filterItem.name] = filterItem.defaultValue'
+            ng-model='filters[filterItem.name]'
+            ng-options='item.id as item.label for item in filterItem.options'>
+            <option ng-if='filterItem.nullable' value=''
+                label='{{ "ALL" | translate }}'>
+                {{ "ALL" | translate }}
+            </option>
+        </select>
+        <span ng-if='filters[filterItem.name] == "$99"'>
+            <i class="fa fa-clock-o"></i>
+            <input type="text" ng-model='filters[filterItem.customizedField]'
+                class="form-control" size="10"
+                bs-datepicker data-date-format="{{filterItem.dateFormat}}" />
+            <input type="text" ng-model='filters[filterItem.customizedField]'
+                class="form-control" size="8"
+                bs-timepicker data-time-format="{{filterItem.timeFormat}}"
+                data-minute-step="{{filterItem.minuteStep}}" />
+        </span>
+    </div>
+    <div ng-switch-when="time_interval">
+        <label>{{filterItem.label | translate}}</label>
+        <select class='form-control' ng-init='filters[filterItem.name] = filterItem.defaultValue'
+            style='width:130px;'
+            ng-model='filters[filterItem.name]'
+            ng-options='item.id as item.label | translate for item in filterItem.options'>
+            <option ng-if='filterItem.nullable' value=''
+                label='{{ "ALL" | translate }}'>
+                {{ "ALL" | translate }}
+            </option>
+        </select>
+        <span ng-if='filters[filterItem.name] == "$99"'>
+            <i class="fa fa-clock-o"></i>
+            <input type="text" ng-model='filters[filterItem.beginField]'
+                class="form-control" size="10"
+                bs-datepicker data-date-format="{{filterItem.dateFormat}}" />
+            <input type="text" ng-model='filters[filterItem.beginField]'
+                class="form-control" size="8"
+                bs-timepicker data-time-format="{{filterItem.timeFormat}}"
+                data-minute-step="{{filterItem.minuteStep}}" />
+            &nbsp;~
+            <input type="text" ng-model='filters[filterItem.endField]'
+                class="form-control" size="10"
+                bs-datepicker data-date-format="{{filterItem.dateFormat}}"/>
+            <input type="text" ng-model='filters[filterItem.endField]'
+                class="form-control" size="8"
+                bs-timepicker data-time-format="{{filterItem.timeFormat}}"
+                data-minute-step="{{filterItem.minuteStep}}"
+                data-round-display="true"/>
+        </span>
+    </div>
+    <div class="" ng-switch-default>
+        <label>{{filterItem.label | translate}}</label>
+        <input type="text" placeholder='{{ filterItem.placeholder | translate }}'
+            ng-model='filters[filterItem.name]'
+            class="form-control {{filterItem.class}}" ng-model="">
+    </div>
+</div>
+<button class='btn btn-primary pull-right' ng-click='search();'>{{'SEARCH' | translate}}</button>
+</form>

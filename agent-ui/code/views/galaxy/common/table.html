@@ -1,0 +1,156 @@
+<div class="table-responsive">
+    <table class="table table-striped table-hover table-bordered" >
+        <thead>
+            <tr>
+                <th ng-if="config.enableSelect">
+                    <input type="checkbox" 
+                        icheck
+                        ng-change="checkAll()"
+                        ng-model="items._selected_all">
+                </th>
+                <th ng-if="!config.disableIndex">
+                    <span translate='ID'>
+                    </span>
+                </th>
+                <th ng-repeat="col in config.columnDefs"
+                    ng-class="{'active' : filters[col.name]}"
+                    >
+                    <a ng-click="sort(col)" ng-if='!col.unsortable'>
+                        <span translate='{{ col.label }}' translate-compile='true'></span>
+                        <span ng-show="filters._sort == col.name || col.sort.indexOf(filters._sort) >= 0">
+                            <i class="fa fa-long-arrow-up" 
+                                ng-show="filters._direction == 'asc'"></i>
+                            <i class="fa fa-long-arrow-down"
+                                ng-show="(filters._direction||'desc') == 'desc'"></i>
+                        </span>
+                    </a>
+                    <span ng-if='col.unsortable' translate='{{ col.label }}' translate-compile='true'>
+                    </span>
+                    <span class='pull-right'>
+                        <a class='filter'
+                            ng-click="filter(col)">
+                            <i class="fa fa-filter text-muted"></i></a>
+                    </span>
+                </th>
+                <th ng-if='!config.disableAction'>{{ 'OPERATION' | translate }}</th>
+            </tr>
+        </thead>
+        <tbody ui-sortable="sortableOptions" ng-model="items">
+            <!-- 加载状态 -->
+            <tr class='text-center' ng-show='loading'>
+                <td colspan='{{ config.columnDefs.length + config.enableSelect + !config.disableAction + !config.disableIndex }}'>
+                    <i class='fa fa-spinner fa-spin fa-2x'></i>
+                </td>
+            </tr>
+            <!-- 表格主体内容 -->
+            <tr ng-repeat='item in items track by $index' 
+                ng-click="checkOne(item, true)"
+                ng-class="{'selected' : item._selected, 'disabled': item[config.disabledTableRow] == false}"
+                ng-show='items.length != 0'
+                >
+                <td ng-if="config.enableSelect">
+                    <input type="checkbox" icheck
+                        ng-change="checkOne(item)"
+                        ng-model="item._selected"
+                ></td>
+                <td ng-if="!config.disableIndex">
+                    <span ng-if="filters"
+                        >{{ ( (filters._page || 1) - 1 ) * filters._num + $index + 1 }}</span>
+                    <span ng-if="!filters">{{ $index + 1 }}</span>
+                </td>
+                <td ng-repeat="col in config.columnDefs" ng-switch='col.type'>
+                    <!-- 详情面 -->
+                    <span ng-switch-when="detail" class='detail'>
+                        <div class='btn-detail' 
+                            ng-if="item.readonly">
+                            <h4 ng-bind="{{ col.template }}" 
+                                ng-if='col.template'></h4>
+                            <h4 ng-if='!col.template'> 
+                                {{  item[col.name] }}
+                            </h4>
+                        </div>
+                        <a class='btn-detail' 
+                            ui-sref=".detail({id: item.id})" 
+                            ng-click="$event.stopPropagation()"
+                            ng-if="!config.inline && !item.readonly">
+                            <h4 ng-bind="{{ col.template }}" 
+                                ng-if='col.template'></h4>
+                            <h4 ng-if='!col.template'> 
+                                {{  item[col.name] }}
+                            </h4>
+                        </a>
+                        <a class='btn-detail' ng-if="config.inline">
+                            <span contenteditable> {{  item[col.name] }} </span>
+                        </a>
+                        <i ng-show="item._status == 'SUCCEED'" class="fa fa-check text-navy"></i>
+                        <i ng-show="item._status == 'UPDATING'" class="fa fa-spinner fa-pulse text-info"></i>
+                        <div ng-show="item._error" class="text-danger">
+                            <i class="fa fa-warning "></i>
+                            {{ item._error.msg }}
+                        </div>
+                    </span>
+                    <!-- 关系的链接列表 -->
+                    <div class='cell-list'>
+                        <div ng-repeat="subItem in item[col.name]" ng-switch-when="list">
+                            <a 
+                                ng-click="$state.go(col.route, {id: subItem.id})">
+                                <span ng-bind="{{ col.template }}"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 状态类 -->
+                    <span ng-switch-when="options" 
+                        ng-repeat="option in col.options"
+                        ng-if="option.id == item[col.name]"
+                        class="label label-{{ option.style }}">
+                            {{ option.label | translate }}
+                    </span>
+                    <!-- 复杂关系类tree -->
+                    <div ng-switch-when="tree" class='cell-tree'>
+                    <ul class='tree' 
+                            ng-repeat="(subKey, subItem) in item[col.name]">
+                            <!-- TODO galaxy的 controller需要定义 route -->
+                            <a ng-click="$state.go(col.route, {id: subItem.id})">
+                                <span ng-bind="{{ col.template }}"></span>
+                                <span >[{{ subItem[col.leafField] | count }}]</span>
+                            </a>
+                            <li class="leaf" 
+                                ng-repeat="(leafKey, leaf) in subItem[col.leafField]">
+                                <ins class="tree-icon">&nbsp;</ins>
+                                <span ng-bind="{{ col.leafTemplate }}"></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- 模板 TODO 这里不明白 -->
+                    <div class='cell-tpl'>
+                        <span ng-switch-when='tpl'>
+                            <span ng-include="col.templateUrl"></span>
+                            <span ng-bind="{{col.template}}"></span>
+                        </span>
+                    </div>
+
+                    <span ng-switch-when='link'>
+                        <a href='{{col.href}}:{{item[col.name]}}'>{{item[col.name]}}</a>
+                    </span>
+
+                    <!-- 模板 -->
+                    <span ng-switch-when='textarea'>
+                        <div style='white-space: pre;'>{{ item[col.name]}}</div>
+                    </span>
+
+                    <!-- 普通文本 -->
+                    <span ng-switch-default>{{ item[col.name] }}</span>
+                    <div><small ng-bind="{{ col.small }}"></small></div>
+                </td>
+                <td ng-if='!config.disableAction' ng-include="config.action || 'views/galaxy/common/action.html'">
+                </td>
+            </tr>
+            <!-- 表格为空 -->
+            <tr ng-show='items.length == 0' class='text-center'>
+                <td colspan='{{ config.columnDefs.length + config.enableSelect + !config.disableAction + !config.disableAction }}'>
+                    No Data
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

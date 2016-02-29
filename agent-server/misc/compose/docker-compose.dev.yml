@@ -1,0 +1,23 @@
+web:
+    volumes:
+     - ${WEB}/code:/usr/share/nginx/html
+
+api:
+    volumes:
+     - ${PWD}/code/:/code
+     - ${PWD}/conf:/conf
+
+server1:
+    volumes:
+     - ${PWD}/code/:/code
+     - ${PWD}/conf:/conf
+
+server2:
+    volumes:
+     - ${PWD}/code/:/code
+     - ${PWD}/conf:/conf
+
+consumer:
+    volumes:
+     - ${PWD}/code/:/code
+     - ${PWD}/conf:/conf

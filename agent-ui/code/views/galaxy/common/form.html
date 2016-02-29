@@ -1,0 +1,282 @@
+<form 
+    name='form'
+    method="get" class="form-horizontal" ng-submit="submitData()">
+
+<div class="hr-line-dashed" style="visibility:hidden"
+    ng-if="formDefs[0].type != 'dash' && formMode != 'multiple'"></div>
+
+<!-- 用于表格的批量编辑，选择范围 !-->
+<!--div class="form-group" ng-show="listTotal">
+    <label class="col-sm-2 control-label">操作范围</label>
+
+    <div class="col-sm-10">
+        <label class="radio-inline">
+            <input icheck type="radio" name="list"
+                value="selected"
+                ng-model="formScope"> 已选择 
+        </label> 
+        <label class="radio-inline">
+            <input icheck type="radio" name="list"
+                value="filtered"
+                ng-model="formScope"> 过滤后
+        </label> 
+    </div>
+</div-->
+
+<div class="form-group" 
+    ng-repeat="formItem in formDefs" 
+    ng-switch="formItem.type"
+    ng-show="!formItem.show || formItem.show(formData)">
+    <label class="label-{{ formItem.name}} col-sm-2 control-label" 
+        ng-if="formItem.type != 'dash'">
+        <span ng-if="formMode == 'multiple' && $first">
+            <i class="icon-lg fa fa-minus-square-o" ng-click="$emit('removeForm', formItem, formData)"></i>
+            <i class="icon-lg fa fa-plus-square-o" ng-click="$emit('insertForm', formItem, formData)"></i>
+        </span>
+        <span ng-if="formItem.rules.required" class='text-danger'>*</span>
+        {{ formItem.label }}</label>
+    <div ng-switch-when='dash' class='form-dash'>
+        <div class="hr-line-dashed"></div>
+        <h4 ng-if="formItem.text"> {{ formItem.text }} </h4>
+    </div>
+
+    <!-- textarea -->
+    <div class="{{ formItem.col || 'col-sm-6' }}" ng-switch-when='textarea'>
+        <textarea class="form-control" 
+            name="{{ formItem.name }}"
+            ng-model="formData[formItem.name]"></textarea>
+    </div>
+
+    <!-- 输入框 -->
+    <div class="{{ formItem.col || 'col-sm-6' }}" ng-switch-default>
+        <div ng-class="{'input-group': formItem.addon}">
+            <input type="text" name="{{ formItem.name }}"
+                class="form-control" ng-model="formData[formItem.name]" 
+                ng-disabled="formData.id && formItem.readonly">
+            <span class="input-group-addon" ng-if="formItem.addon">
+                {{ formItem.addon }}
+            </span>
+        </div>
+    </div>
+
+    <!-- 时间 -->
+    <div class="col-sm-6" ng-switch-when="datetime">
+        <div class="input-group date">
+            <input type="datetime" class="form-control" date-time  view="date"
+                min-view="{{ formItem.minView }}"
+                format="{{ formItem.timeFormat }}"
+                name="{{ formItem.name }}"
+                placeholder='{{ formItem.placeholder }}'
+                ng-model="formData[formItem.name]">
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+        </div>
+    </div>
+
+    <div class="col-sm-6" ng-switch-when="date">
+        <div class="input-group date">
+            <input type="text" class="form-control" 
+                name="{{ formItem.name }}"
+                placeholder='{{ formItem.placeholder }}'
+                uib-datepicker-popup="{{formItem.dateFormat}}"
+                is-open="formItem.opened"
+                ng-model="formData[formItem.name]"
+                ng-click="formItem.opened=true;"
+                ng-required="formItem.rules.required" 
+                today-text="今天"
+                clear-text="清除"
+                close-text="关闭"/>
+            <span class="input-group-addon">
+                <i class="fa fa-btn fa-calendar" ng-click="formItem.opened=true;"></i>
+            </span>
+        </div>
+    </div>
+
+    <!-- 颜色 -->
+    <div class="col-sm-6" ng-switch-when="color">
+        <a colorpicker class="btn btn-sm"
+            style="color: white;background-color: {{ formData[formItem.name] }}" 
+            ng-model="formData[formItem.name]">
+            {{ formData[formItem.name] }}
+        </a>
+    </div>
+
+    <!-- 多行输入 -->
+    <div class="{{ formItem.col || 'col-sm-6'}}" ng-switch-when="text">
+        <textarea type="text" 
+            rows="{{ formItem.rows || 10 }}"
+            name="{{ formItem.name }}"
+            placeholder="{{ formItem.placeholder }}"
+            class="form-control" ng-model="formData[formItem.name]">
+        </textarea>
+        <small>{{ formItem.format }}</small>
+    </div>
+
+
+    <!-- 选项 -->
+    <div class="col-sm-6" ng-switch-when="options" 
+        ng-init="loadOptions(formItem)"
+        >
+        <label 
+            class="radio-inline" 
+            ng-if="formItem.options.length <= 5 && formItem.select != true"
+            ng-repeat="option in formItem.options"> 
+            <input icheck type="radio" name="{{ formItem.name }}" 
+                ng-value="option.id"
+                ng-disabled="option.disabled"
+                ng-model="formData[formItem.name]"> {{ option.label }}
+        </label> 
+        <div ng-class="{'input-group': formItem.loadOptions}">
+        <select class="form-control"
+            name="{{ formItem.name }}"
+            ng-if="formItem.options.length > 5 || formItem.select == true"
+            ng-options="item.id as item.label for item in formItem.options"
+            ng-model="formData[formItem.name]">
+            <option value="">无</option>
+        </select>
+        <span class="input-group-addon no-border" ng-if="formItem.loadOptions">
+            <button class="btn item btn-default btn-outline btn-xs" 
+                type="button"
+                ng-click="loadOptions(formItem, true)">
+                <i class="fa fa-refresh"></i></button>
+        </span>
+        </div>
+    </div>
+
+    <!-- 标签 P.S. 标签在批量编辑时用普通选项 -->
+    <!--div class="col-sm-10" ng-switch-when="tag" ng-if="overview">
+        <label class="list-option" ng-repeat="tag in formData[formItem.name]">
+            <div class="btn-group item">
+                <button class="btn btn-xs" type="button"
+                    style="color: white; background-color: {{ '#' + tag.tagColor }}">
+                    <i class="fa fa-tag"></i> {{ tag.tagName }}
+                </button>
+                <button class="btn btn-xs" type="button"
+                    style="color: white; background-color: {{ '#' + tag.tagColor }}"
+                    ng-click="form.$dirty=true; removeOne(formItem.name, subItem);">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+        </label>
+        <label class="list-option">
+            <button class="btn btn-default btn-outline btn-xs" type="button">
+                <i class="fa fa-plus"></i></button>
+            <button class="btn item btn-default btn-outline btn-xs" type="button"
+                ng-click="form.$dirty=true; removeAll(formItem.name, subItem);"
+                ng-show="formData[formItem.name].length > 3"
+                >
+                <i class="fa fa-minus"></i></button>
+            </button>
+        </label>
+    </div-->
+
+    <!-- 模板 -->
+    <div class="col-sm-6" ng-switch-when="tpl">
+        <div ng-include="formItem.formUrl || formItem.templateUrl"></div>
+    </div>
+
+    <!-- 不再需要了，统一用chosen div class="col-sm-6"  
+        ng-if="!overview && (formItem.type == 'list' || formItem.type == 'tag')">
+        <div class="input-group">
+            <select 
+                class="form-control"
+                ng-init="loadOptions(formItem)"
+                ng-model="formData[formItem.name]">
+                <option 
+                    ng-repeat="subItem in formItem.options track by subItem.id"
+                    ng-value="subItem.id"
+                    ng-bind="{{ formItem.template }}">
+                </option>
+            </select>
+            <span class="input-group-addon no-border">
+                <button class="btn item btn-default btn-outline btn-xs" 
+                    type="button"
+                    ng-click="loadOptions(formItem)">
+                    <i class="fa fa-refresh"></i></button>
+            </span>
+        </div>
+    </div-->
+
+    <!-- 关联项 -->
+    <div class="col-sm-6" ng-switch-when="list">
+        <div class="input-group">
+        <select chosen multiple class="chosen-select form-control"
+            name="{{ formItem.name }}"
+            search-contains=true
+            placeholder-text-multiple="' '"
+            placeholder-text-single="' '"
+            no-results-text="' '"
+            ng-init="loadOptions(formItem)"
+            ng-options="item.id as item.label for item in formItem.options"
+            ng-model="formData[formItem.key || formItem.name]">
+        </select>
+        <span class="input-group-addon no-border">
+            <button class="btn item btn-default btn-outline btn-xs" 
+                type="button"
+                ng-click="loadOptions(formItem, true)">
+                <i class="fa fa-refresh"></i></button>
+        </span>
+        </div>
+    </div>
+
+    <!--div class="col-sm-8" ng-switch-when="list" ng-if="overview">
+        <span class="list-option" ng-repeat="subItem in formData[formItem.name] track by $index">
+            <div class="btn-group item">
+                <button 
+                    ng-click="$state.go('galaxy.' + formItem.name + '.detail', {id: subItem.id})"
+                    class="btn btn-outline btn-xs btn-success" type="button">
+                    <span ng-bind="{{ formItem.template }}"></span>
+                </button>
+                <button class="btn btn-outline btn-xs btn-success" type="button"
+                    ng-click="form.$dirty=true; removeOne(formItem.name, subItem);">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+        </span>
+        <span class="list-option">
+            <button class="btn item btn-default btn-outline btn-xs" type="button"
+                ng-show="!formItem.$editing">
+                <i class="fa fa-plus"></i></button>
+            <button class="btn item btn-default btn-outline btn-xs" type="button"
+                ng-click="form.$dirty=true; removeAll(formItem.name, subItem);"
+                ng-show="!formItem.$editing && formData[formItem.name] > 3"
+                ><i class="fa fa-minus"></i></button>
+        </span>
+    </div-->
+    <div class="col-sm-10 col-sm-offset-2 text-danger" 
+        ng-bind="formData.$errors[formItem.name]">
+    </div>
+    <div class="col-sm-10 col-sm-offset-2 text-muted" 
+        ng-hide="formData.$errors[formItem.name]"
+        ng-bind="formItem.desc">
+    </div>
+</div>
+
+<div class="hr-line-dashed" ng-if="overview && formMode != 'multiple'"></div>
+
+<div class="form-group" ng-if="formMode!='info' && formMode!='multiple'">
+    <div class="col-sm-10 col-sm-offset-2">
+        <button class="btn btn-white" type="button"
+            ng-click="cancel()">取消</button>
+        <button class="btn btn-primary" type="submit"
+            ng-class="{
+                'btn-danger': formScope == 'filtered',
+            }"
+            ng-disabled='form.$invalid || !form.$dirty || listSelected == 0'
+            > 
+            <span ng-show="!listTotal"> {{ formAction || '保存' }}</span>
+            <span ng-show="listTotal && listSelected">
+                {{ formItem.submit || '设置' }}
+                <span ng-show="formScope=='selected'"> {{ listSelected || 0}}</span>
+                <span ng-show="formScope=='filtered'"> {{ listTotal || 0}}</span>
+                项
+            </span>
+            <span ng-show="listTotal && !listSelected">
+                <i class="fa fa-info-circle"></i> 请先选择
+            </span>
+        </button>
+        <span ng-show="listTotal">
+            <input type="checkbox" icheck ng-model="formKeep"> 继续
+        </span>
+    </div>
+</div>
+</form>

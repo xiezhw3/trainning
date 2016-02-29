@@ -1,0 +1,41 @@
+<div style='padding: 0 0 5px 0;'>
+    <span>
+        <a id="prev" href="javascript:void(0)" class="fa fa-chevron-left"
+        ng-disabled='curPage == 1' ng-click='prePage();'>
+        </a>
+        <input id="count-input" type="text" size="4"
+            ng-class='{"border-red": pageError}'
+        ng-model='curPage' i-enter-key-press='toPage();'>/<span id="all-page">{{ totalPages }}</span>
+        <a id="next" href="javascript:void(0)" class="fa fa-chevron-right"
+        ng-disabled='curPage == totalPages' ng-click='nextPage();'></a>
+    </span>
+    <span class="btn-group" ng-show='!disableOptions'>
+        <label class="btn btn-sm btn-outline btn-default" ng-repeat='page in pageOptions'
+        value="{{page}}" ng-model='$parent.itemsPerPage' bs-radio
+        >{{page}}
+        </label>
+    </span>
+</div>
+
+<!--
+<pagination
+    first-text="«"
+    previous-text="‹"
+    next-text="›"
+    last-text="»"
+    total-items="listTotal" 
+    max-size="3"
+    items-per-page="filters.num"
+    ng-model="filters.page"  
+    class="pagination hidden-xs" 
+    boundary-links="true"></pagination>
+<pager
+    total-items="listTotal" 
+    items-per-page="filters.num"
+    ng-model="filters.page"  
+    previous-text="‹"
+    next-text="›"
+    align='false'
+    class="visible-xs-inline" 
+    ></pager>
+-->

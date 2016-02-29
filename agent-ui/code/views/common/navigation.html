@@ -1,0 +1,27 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul side-navigation class="nav" id="side-menu">
+            <li ng-class="{active: $state.includes('agent')}">
+                <a href=""><i class="fa fa-calendar"></i> 
+                    <span class="nav-label">单机监控</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level" ng-class="{in: $state.includes('agent')}">
+                    <li ui-sref-active="active">
+                        <a ui-sref="agent.dashboare">
+                            <i class="fa fa-tachometer"></i> 
+                            仪表盘</a></li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="agent.cpu">
+                            <i class="fa fa-cogs"></i> 
+                            Cpu</a></li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="agent.memory">
+                            <i class="fa fa-dot-circle-o"></i> 
+                            内存</a></li>
+                    <li ui-sref-active="active">
+                    <a ui-sref="agent.load">
+                        <i class="fa fa-beer"></i> 
+                            机器负载</a></li>
+                </ul>
+            </li>
+    </div>
+</nav>

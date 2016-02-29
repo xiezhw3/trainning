@@ -1,0 +1,51 @@
+web:
+  image: dockerhub.nie.netease.com/gzxiezhiwang/agent-web:1.0
+  restart: always
+  links:
+     - api:agentapi
+  ports:
+   - 8080:80
+
+mongo:
+    image: dockerhub.nie.netease.com/gzxiezhiwang/mongo:1.0
+    command: --smallfiles
+    restart: always
+
+rabbitmq:
+    image: dockerhub.nie.netease.com/library/rabbitmq:3-management
+    ports:
+     - "15672:15672"
+    environment:
+        RABBITMQ_DEFAULT_USER: agent
+        RABBITMQ_DEFAULT_PASS: agent
+api:
+    image: dockerhub.nie.netease.com/gzxiezhiwang/agent-server:1.0
+    links:
+     - rabbitmq:rabbitmq
+     - mongo:mongodb
+    ports:
+     - 5100:5100
+    command: python -m code api
+    restart: always
+
+consumer: 
+    image: dockerhub.nie.netease.com/gzxiezhiwang/agent-server:1.0
+    links:
+     - mongo:mongodb
+     - rabbitmq:rabbitmq
+    command: python -m code consumer 
+    restart: always
+
+server1:
+    image: dockerhub.nie.netease.com/gzxiezhiwang/agent-server:1.0
+    links:
+     - api:agent_api
+    command: python -m code server -t 10
+    restart: always
+
+server2:
+    image: dockerhub.nie.netease.com/gzxiezhiwang/agent-server:1.0
+    links:
+     - api:agent_api
+    command: python -m code server -t 10
+    restart: always

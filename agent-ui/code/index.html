@@ -1,0 +1,90 @@
+<!--
+* INSPINIA - Responsive Admin Theme
+* Copyright 2015 Webapplayers.com
+* Version 1.9
+*
+-->
+
+<!DOCTYPE html>
+<html ng-app="inspinia">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Page title set in pageTitle directive -->
+    <title>Agent监控</title>
+
+    <!-- Font awesome -->
+    <link href="/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="/js/angular-chart.js/dist/angular-chart.css">
+    <link rel="stylesheet" href="/css/plugins/angular-bootstrap-datetimepicker/datetimepicker.css"/>
+
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Main Inspinia CSS files -->
+    <link href="/css/animate.css" rel="stylesheet">
+    <link id="loadBefore" href="/css/style.css" rel="stylesheet">
+    <link id="loadBefore" href="/css/custom.css" rel="stylesheet">
+    <base href="/">
+
+
+</head>
+
+<!-- ControllerAs syntax -->
+<!-- Main controller with serveral data used in Inspinia theme on diferent view -->
+<body ng-controller="MainCtrl as main">
+
+<!-- Main view  -->
+<div id='ui-view' ui-view></div>
+
+<!-- jQuery and Bootstrap TODO -->
+<script src="/js/jquery/jquery-2.1.1.min.js"></script>
+<script src="/js/plugins/jquery-ui/jquery-ui.js"></script>
+<script src="/js/bootstrap/bootstrap.min.js"></script>
+<script src="/js/plugins/fullcalendar/moment.min.js"></script>
+
+<!-- MetsiMenu -->
+<script src="/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="/js/inspinia.js"></script>
+
+<!-- Main Angular scripts-->
+<script src="/js/angular/angular.min.js"></script>
+<script src="/js/angular/angular-cookies.min.js"></script>
+<script src="/js/angular/angular-resource.min.js"></script>
+<script src="/js/angular/angular-animate.min.js"></script>
+<script src="/js/plugins/oclazyload/dist/ocLazyLoad.min.js"></script>
+<script src="/js/angular-translate/angular-translate.min.js"></script>
+<script src="/js/ui-router/angular-ui-router.0.2.15.js"></script>
+<script src="/js/plugins/angular-cookie.js"></script>
+<script src="/js/plugins/ui-breadcrumbs/uiBreadcrumbs.js"></script>
+<script src="/js/plugins/ui-sortable/sortable.js"></script>
+<script src="/js/plugins/angular-timer/angular-timer.min.js"></script>
+<script src="/js/bootstrap/ui-bootstrap-tpls-0.14.3.min.js"></script>
+<script src="/js/angular-bootstrap-datetimepicker/datetimepicker.js"></script>
+<script src="/js/plugins/highchart/highstock.js"></script>
+<script src="/js/plugins/highcharts-ng/highcharts-ng.js"></script>
+
+<!-- Anglar App Script -->
+<script src="/js/app.js"></script>
+<script src="/js/utils.js"></script>
+<script src="/js/constants.js"></script>
+
+
+<script src="/js/config.js"></script>
+<script src="/js/translations.js"></script>
+<script src="/js/directives.js"></script>
+<script src="/js/filters.js"></script>
+<script src="/js/services.js"></script>
+
+
+<!-- controllers -->
+<script src="/js/controllers.js"></script>
+<script src="/js/controllers/agent.js"></script>
+
+</body>
+</html>

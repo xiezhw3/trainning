@@ -1,0 +1,113 @@
+<div class="jumbotron">
+<div class="container">
+<div class="dropdown col-md-5">
+监控数据开始时间：
+    <a class="dropdown-toggle"
+        id="dropdown2"
+        role="button"
+        data-toggle="dropdown"
+        data-target="#"
+        href="#">
+    <div class="input-group">
+       <input type="text"
+       class="form-control"
+       ng-model="fromdata.data"
+       placeholder="Start">
+            <span class="input-group-addon">
+                <i class="glyphicon glyphicon-calendar"></i>
+            </span>
+    </div>
+  </a>
+  <ul class="dropdown-menu"
+    role="menu"
+    aria-labelledby="dLabel">
+    <datetimepicker
+        data-ng-model="fromdata.data"
+        data-on-set-time="fromTimeOnTimeSet(newDate, oldDate)"
+        data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+  </ul>
+</div>
+
+<div class="dropdown col-md-5">
+监控数据截止时间：
+    <a class="dropdown-toggle"
+        id="dropdown3"
+        role="button"
+        data-toggle="dropdown"
+        data-target="#"
+        href="#">
+    <div class="input-group">
+       <input type="text"
+       class="form-control"
+       ng-model="todata.data"
+       placeholder="End">
+            <span class="input-group-addon">
+                <i class="glyphicon glyphicon-calendar"></i>
+            </span>
+    </div>
+  </a>
+  <ul class="dropdown-menu"
+    role="menu"
+    aria-labelledby="dLabel">
+    <datetimepicker
+        data-ng-model="todata.data"
+        data-on-set-time="toTimeOnTimeSet (newDate, oldDate)"
+        data-datetimepicker-config="{ dropdownSelector: '#dropdown3' }"/>
+  </ul>
+</div>
+</div>
+<hr />
+<div class="container">
+<div class="col-md-4">
+监控类型：
+<div
+    isteven-multi-select
+    input-model="monitorInput[infoType]"
+    on-item-click="update()"
+    on-select-all="selectAllOrNone(infoType)"
+    on-select-none="selectAllOrNone(infoType)"
+    output-model="monitorOutput[infoType]"
+    button-label="name"
+    item-label="maker name"
+    tick-property="ticked"
+    translation="monitorLang"
+>
+</div>
+</div>
+<div class="col-md-4">
+监控机器：
+<div
+    isteven-multi-select
+    input-model="ipListInput"
+    on-item-click="update()"
+    on-select-all="selectAllOrNone('ip')"
+    on-select-none="selectAllOrNone('ip')"
+    output-model="ipListOutput"
+    button-label="name"
+    item-label="maker name"
+    tick-property="ticked"
+    translation="ipsLang"
+>
+</div>
+</div>
+
+<div class="col-md-2">
+图表类型：
+<div class="form-group">
+   <select class="form-control" ng-model="chartTypes.selected" ng-options="type as type for type in chartTypes.options">
+   </select>
+</div>
+</div>
+</div>
+</div>
+<div class="container">
+    <div class="panel panel-default col-md-10">
+        <div class="ng-scope" ng-repeat="dataType in dataTypes">
+        <div class="panel panel-default" >
+            <div class="chart-container">
+            <highchart id="dataType" config="highchartsNG[dataType]" class="span10"></highchart>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>

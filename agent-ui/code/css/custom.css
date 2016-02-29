@@ -1,0 +1,700 @@
+/* fix */
+
+td.desc {
+    max-width: 250px;
+}
+
+.xform-horizontal {
+    clear: both;
+}
+
+th {
+    white-space: nowrap;
+}
+
+table.psdash th {
+    padding: 13px 6px;
+    font-size: 15px;
+    font-weight: 300;
+    margin-right: 10px;
+    white-space: nowrap;
+}
+table.psdash >thead>tr>th {
+    border-bottom: 2px solid #ddd;
+}
+
+
+.nav-header {
+    padding-top   : 8px;
+    padding-bottom: 10px;
+}
+.nav-header h2 {
+    font-family: Impact, Charcoal, sans-serif;
+
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 15.3999996185303px;
+}
+
+.breadcrumb>li+li:before {
+    font-family: FontAwesome;
+    font-size: 14px;
+    content: "\f105";
+    color: #b2b6bf;
+    padding: 0;
+    margin: 0 8px 0 0;
+    position: relative;
+    top: 1px;
+}
+
+.breadcrumb>li>a.active {
+    display: inline-block;
+    color: #4c8fbd;
+}
+
+
+.breadcrumb .home-icon {
+    font-size: 20px;
+    margin-left: 2px;
+    margin-right: 2px;
+    vertical-align: top;
+}
+
+.breadcrumb {
+    padding: 15px 5px;
+    min-height: 50px;
+    background-color: transparent;
+    display: inline-block;
+    line-height: 20px;
+    /*margin: 6px 6px 0 12px; */
+    font-size: 14px;
+    color: #333;
+    border-radius: 0;
+}
+
+.table > tbody > tr.selected {
+    background-color: #dff0d8
+}
+
+.table > tbody > tr.disabled {
+    background-color; #fff;
+}
+
+.table > tbody > tr.disabled {
+    color: #bbb;
+}
+
+.table > tbody > tr.disabled a {
+    text-decoration: line-through;
+    color: #a4c0dc;
+}
+
+.btn-detail {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.btn-status {
+    font-family: monospace;
+    font-size: 11px;
+    padding: 0px 5px;
+}
+
+.btn-ban {
+    text-decoration: line-through;
+}
+
+.btn-circle.btn-xs {
+    width: 24px;
+    height: 24px;
+    padding: 4px 0;
+    border-radius: 8px;
+    font-size: 10px;
+    line-height: 1.2;
+}
+
+.ibox-toolbar .btn-group-sm {
+    /*vertical-align: inherit;TODO*/
+}
+
+.ibox-toolbar {
+    background-color: #ffffff;
+    border-color: #e7eaec;
+    border-image: none;
+    /*border-style: solid solid none;*/
+    border-width: 4px 0px 0;
+    color: inherit;
+    margin-bottom: 0;
+    padding: 7px 15px 7px;
+
+    /* 表格页设置时，防止被遮住 */
+    overflow: visible;
+    /*height: 64px;*/
+}
+
+.filters {
+    vertical-align: middle;
+    padding-top: 15px;
+}
+.filters .btn-group {
+    margin-right: 5px;
+}
+
+.filter {
+    opacity: 0;
+    margin-left: 0 2px;
+}
+
+.active > .filter .fa-filter {
+    color: #428bca;
+}
+.active > .filter ,
+*:hover > .filter {
+    opacity: 1;
+}
+
+
+
+.search {
+    display: inline-block;
+    width: 350px;
+    vertical-align: middle;
+    padding: 10px 30px 0px 0px;
+}
+
+.table-info {
+    position: relative;
+    float: left;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+
+}
+
+.pagination {
+    margin: 0;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+.pagination > li > a, .pagination > li > span {
+    padding: 5px 10px;
+}
+
+.radio-inline,
+.checkbox-inline {
+    margin-top: 0;
+    padding-left: 0px;
+    padding-right: 20px;
+}
+.radio-inline+.radio-inline, .checkbox-inline+.checkbox-inline {
+    margin-left: 0px;
+    margin-right: 10px;
+}
+
+.list-option {
+    padding-top: 7px;
+    display: inline-block;
+}
+
+.ibox-toolbar .item ,
+.ibox-title .item ,
+.list-option .item {
+    margin-right: 5px;
+}
+
+/*
+.ibox-toolbar .form-control,
+select.form-control {
+    width: inherit;
+    display: inline-block;
+}
+*/
+
+.top {
+    vertical-align: top;
+}
+    
+
+.input-sm, .form-group-sm .form-control {
+    font-size: 13px;
+}
+
+.ibox-toolbar select {
+    display: inline-block;
+    vertical-align: middle;
+    width: inherit;
+}
+
+.divider-vertical {
+    display: inline-block;
+    vertical-align: middle;
+    height: 20px;
+    margin: 0 15px;
+    border-right: 1px solid #ffffff;
+    border-left: 1px solid #f2f2f2;
+}
+
+select.form-control ~ .btn {
+    margin: 6px;
+}
+
+/* 多选限制options的高度*/
+.multi-options ul.select {
+    max-height: 200px;
+    overflow: auto;
+}
+
+/* 让分隔线与表单内容对齐 */
+.form-dash {
+    padding: 0px 15px;
+}
+
+
+table td small {
+  font-size: 11px;
+  color: #868686;
+}
+
+.input-xs {
+    height: 22px;
+    padding: 5px 5px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+
+.btn-outline[btn-checkbox] {
+    transition: none;
+}
+
+.btn-outline.btn-default[btn-radio] ,
+.btn-outline.btn-default[btn-checkbox] {
+    color: #c2c2c2;
+    border-color: #c2c2c2;
+    background-color: #FFFFFF;
+}
+
+.btn-outline.btn-default.active[btn-radio],
+.btn-outline.btn-default.active[btn-checkbox] {
+    background-color: #c2c2c2;
+    border-color: #c2c2c2;
+    color: #FFFFFF;
+}
+
+.btn-outline.btn-danger[btn-radio] ,
+.btn-outline.btn-danger[btn-checkbox] {
+    color: #ed5565;
+    border-color: #ed5565;
+    background-color: #FFFFFF;
+}
+
+.btn-outline.btn-danger.active[btn-radio],
+.btn-outline.btn-danger.active[btn-checkbox] {
+    background-color: #ed5565;
+    border-color: #ed5565;
+    color: #FFFFFF;
+}
+
+.btn-outline.btn-info[btn-radio] ,
+.btn-outline.btn-info[btn-checkbox] {
+    color: #23c6c8;
+    border-color: #23c6c8;
+    background-color: #FFFFFF;
+}
+
+.btn-outline.btn-info.active[btn-radio],
+.btn-outline.btn-info.active[btn-checkbox] {
+    background-color: #23c6c8;
+    border-color: #23c6c8;
+    color: #FFFFFF;
+}
+
+
+li.leaf {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    list-style-type: none;
+    display: block;
+    min-height: 18px;
+    line-height: 18px;
+    white-space: nowrap;
+    margin-left: 5px;
+    background-image: url("/static/img/d.png");
+    background-position: -90px 0;
+    background-color: transparent;
+    background-repeat: repeat-y;
+}
+
+li.leaf:nth-last-child(1) {
+    background: transparent;
+}
+
+ins.tree-icon {
+    background-image: url("/static/img/d.png");
+    background-repeat: no-repeat;
+    background-position: -36px 0px;
+    background-color: transparent;
+    display: inline-block;
+    text-decoration: none;
+    width: 18px;
+    height: 18px;
+    margin: 0 0 0 0;
+    padding: 0;
+}
+
+ul.tree {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    list-style-type: none;
+}
+
+.cell-list,
+.cell-tree,
+.cell-tpl {
+    max-height: 100px;
+    /*TODO 似乎会有影响 */
+    overflow: auto;
+}
+
+span.pre {
+    font-family: monospace;
+    white-space: pre;
+}
+
+.font-big {
+    font-size: 15px;
+}
+
+.font-lg {
+    font-size: 16px;
+}
+.font-lg-x {
+    font-size: 18px;
+}
+
+.project-title {
+    width: 80px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.dropdown-menu>li>a.project-item {
+    white-space: pre;
+    font-family: Monaco, monospace, Courier, Menlo,Consolas;
+}
+
+.font-red {
+    color: red;
+}
+
+.border-red {
+    border: 1px solid red;
+}
+
+.roster-sched {
+    padding: 6px;
+}
+
+.no-border {
+    border: none;
+}
+
+.popover-content {
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.form-filter {
+    padding: 10px 5px;
+    margin-bottom: 20px;
+    border: 2px solid #dff0d8;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+}
+
+.project-nav {
+    padding: 5px;
+}
+
+/************   layout ************/
+
+
+@media (max-width: 767px) {
+    #page-wrapper {
+        padding: 0 0 0 0;
+    }
+    .mini-sidebar > a {
+        margin: 10px 2px 0px 10px;
+    }
+    .xbreadcrumb {
+        padding-left: 20px;
+    }
+
+    .ibox-content {
+        padding: 4px;
+    }
+}
+
+@media (min-width: 768px) {
+    html, body, #ui-view, #wrapper {
+        height: 100%;
+    }
+
+    #page-wrapper {
+        min-height: 100%;
+    }
+
+
+    #content-nav { 
+        position: fixed;
+        right: 20px;
+        left: 230px;
+        z-index: 100;
+        -webkit-transition: all 0.5s;
+        -moz-transition: all 0.5s;
+        -o-transition: all 0.5s;
+        transition: all 0.5s;
+    }
+
+    #content-view {
+        /*position: fixed;
+        top: 50px;
+        right: 10px;
+        left: 230px;
+        bottom: 0px;
+        overflow-y: scroll;*/
+        padding-top: 60px;
+        /*
+        overflow-x: hidden;
+        overflow-y: visible;
+        */
+    }
+    
+    .xibox-toolbar {
+        position: fixed;
+        right: 10px;
+        left: 230px;
+        z-index: 100;
+    }
+}
+
+
+/************************** 切换项目 *************************/
+.project-wrapper {
+    border-color: #676a6c;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+.project-info {
+    list-style: none;
+    padding-left: 0px;
+    width: 200px;
+    max-height: 200px;
+    overflow: auto;
+}
+
+ul.project-info li {
+    padding: 5px 5px;
+}
+
+ul.project-info li.divider {
+    height: 1px;
+    padding: 0px;
+    overflow: hidden;
+    background-color: #e5e5e5;
+}
+
+.project-info a {
+    color: #000;
+}
+
+.project-info i {
+    color: #4c8fbd;
+}
+
+.project-info input {
+    width: 100%;
+}
+
+.project-current a {
+    font-size: 18px !important;
+}
+
+.project-btn {
+    text-align: center;
+    width: 100%;
+}
+
+.project-btn button {
+    width: 100%;
+}
+
+
+
+/***** 侧导航，菜单项可以显示成一行****/
+.menu-inline {
+    padding: 14px 20px 14px 25px;
+}
+.menu-inline > i {
+    margin-right: 6px;
+}
+.menu-inline > i ,
+.menu-inline > a {
+    color: #a7b1c2;
+    font-weight: 600;
+}
+.menu-inline > a.active {
+  color: #ffffff;
+}
+
+/*************************值班表*************************/
+.roster-title-edit {
+    border: none;
+}
+.roster-title {
+    padding: 0px 2px;
+    font-size: 16px;
+    line-height: 30px;
+    vertical-align: bottom;
+}
+.img-icon {
+    width: 50px;
+}
+
+/* cgNotify 的样式把alert的覆盖了 */
+.alert.alert-warning {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+}
+.alert.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+
+/* 为了日期选择 */
+.fa-btn {
+    cursor: pointer;
+}
+
+.ui-select-multiple.ui-select-bootstrap .ui-select-match-item.btn {
+    background: #f1f1f1;
+    border: 1px solid #ededed;
+    border-radius: 2px;
+    box-shadow: none;
+    color: #333333;
+    cursor: default;
+    margin: 3px 0 3px 5px;
+    padding: 1px 4px;
+    font-size: 13px;
+    font-weight: 500;
+
+}
+
+.ui-select-container.ui-select-bootstrap .ui-select-choices-row>a:hover, 
+.ui-select-container.ui-select-bootstrap .ui-select-choices-row>a:focus {
+    background-color: #3875d7;
+}
+
+.ui-select-container.ui-select-bootstrap .ui-select-choices-row>a {
+    margin: 0;
+    line-height: 15px;
+    font-size: 13px;
+}
+
+.ui-select-choices-group-label {
+    display: list-item;
+    font-weight: bold;
+    font-size: 13px;
+    cursor: default;
+    padding: 5px 6px;
+    margin: 0;
+}
+
+.form-control.ui-select-multiple.ui-select-bootstrap {
+    background-color: #FFFFFF;
+    border: 1px solid #CBD5DD;
+    border-radius: 2px;
+    cursor: text;
+    height: auto !important;
+    margin: 0;
+    min-height: 30px;
+    overflow: hidden;
+    padding: 1px;
+}
+
+.fc-event-container {
+    overflow-x: visible;
+}
+
+/* 值班表编辑页面，防止保存溢出 */
+.extra-form-group {
+    overflow: hidden;
+}
+
+.strong {
+    font-weight: bold;
+}
+/*
+.fc-event-container .fc-event{
+    margin-right: -30%;
+    margin-left: 30%;
+}
+*/
+
+.date .btn-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+
+
+
+
+
+/************************* animation *************************/
+/* rotate and fall */
+@keyframes rotateFall {
+    0%         { transform: rotateZ(0deg); }
+    20%     { transform: rotateZ(10deg); animation-timing-function: ease-out; }
+    40%     { transform: rotateZ(17deg); }
+    60%     { transform: rotateZ(16deg); }
+    100%     { transform: translateY(100%) rotateZ(17deg); }
+}
+ 
+/* slide in from the bottom */
+@keyframes slideOutLeft {
+    to         { transform: translateX(-100%); }
+}
+ 
+/* rotate out newspaper */
+@keyframes rotateOutNewspaper {
+    to         { transform: translateZ(-3000px) rotateZ(360deg); opacity: 0; }
+}
+ 
+/* entering animations --------------------------------------- */
+/* scale up */
+@keyframes scaleUp {
+    from     { opacity: 0.3; -webkit-transform: scale(0.8); }
+}
+ 
+/* slide in from the right */
+@keyframes slideInRight {
+    from     { transform:translateX(100%); }
+    to         { transform: translateX(0); }
+}
+ 
+/* slide in from the bottom */
+@keyframes slideInUp {
+    from     { transform:translateY(100%); }
+    to         { transform: translateY(0); }
+}
+
+.ng-enter             { animation: scaleUp 0.5s both ease-in; z-index: 8888; }
+.ng-leave             { animation: slideOutLeft 0.5s both ease-in; z-index: 9999; }

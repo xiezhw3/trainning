@@ -1,0 +1,33 @@
+<div class="border-bottom">
+    <nav class="navbar navbar-static-top" 
+        role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <span minimaliza-sidebar 
+                class="visible-xs-inline mini-sidebar"></span>
+            <ui-breadcrumbs 
+                main-data="data"
+                displayname-property="data.displayName" 
+                abstract-proxy-property="data.proxy" 
+                ></ui-breadcrumbs>
+            <button class='btn btn-outline btn-info btn-xs'
+                ng-if="timer.countdown"
+                ng-click="
+                    $emit('timer-reload'); 
+                    $broadcast('timer-reset'); 
+                    $broadcast('timer-resume');">
+                <i class="fa fa-refresh"></i>
+                <timer countdown="timer.countdown" interval="1000" 
+                    finish-callback="$emit('timer-reload'); start();"
+                    >{{seconds}}</timer>
+            </button>
+        </div>
+        <ul class="nav navbar-top-links navbar-right hidden-xs"
+            ng-show="$state.includes('galaxy.*')">
+            <op-filters 
+                config="config" 
+                filters="filters"
+                filter='openFilter'></op-filters>
+        </ul>
+
+    </nav>
+</div>

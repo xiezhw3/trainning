@@ -1,0 +1,29 @@
+<div class="jumbotron">
+<div class="dropdown col-md-6">
+  <a class="dropdown-toggle" id="dropdown2" role="button"
+     data-toggle="dropdown" data-target="#" href="#">
+    <div class="input-group">
+        <input type="text" class="form-control" ng-model="$root.recordDateStart" placeholder="Start">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+    </div>
+  </a>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+    <datetimepicker data-ng-model="$root.recordDateStart"
+                    data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+  </ul>
+</div>
+<div class="dropdown col-md-6">
+  <a class="dropdown-toggle" id="dropdown3" role="button"
+     data-toggle="dropdown" data-target="#" href="#">
+    <div class="input-group">
+        <input type="text" class="form-control" data-ng-model="$root.recordDateEnd" placeholder="End">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+    </div>
+  </a>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+    <datetimepicker data-ng-model="$root.recordDateEnd"
+                    data-datetimepicker-config="{ dropdownSelector: '#dropdown3' }"/>
+  </ul>
+</div>
+</div>
+

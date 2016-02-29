@@ -1,0 +1,9 @@
+docopt
+psutil
+pymongo
+gevent
+schedule
+amqplib
+pika
+flask
+flask-restful

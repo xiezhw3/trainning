@@ -1,0 +1,23 @@
+<div class="ibox-toolbar">
+    <button class="btn btn-primary btn-outline btn-sm" type="button"
+        ng-disabled="config.editor">
+        <i class="fa fa-plus"></i> 添加
+    </button>
+    <button class="btn btn-info btn-outline btn-sm" type="button"
+        ng-if="tab.import != false"
+        ng-disabled="config.editor">
+        <i class="fa fa-mail-forward"></i> 导入
+    </button>
+    <li class="divider-vertical"></li>
+    <select class="input-sm"
+        ng-model="config.editor" 
+        ng-options="editor.label for editor in tab.config.listEditors">
+        <option value="" selected disabled>请选择批量操作...</option>
+    </select>
+</div>
+<table op-grid 
+    items="data[tab.name]" 
+    config="tab.config" 
+    selected="data[tab.name].selected"
+    >
+</table>

@@ -1,0 +1,41 @@
+<div class="row">
+<div class="col-lg-12">
+    <div class="ibox">
+        <div class="ibox-content">
+            <tabset>
+                <tab heading="设置" 
+                    ng-init="select()">
+                    <op-form 
+                        on-cancel="cancel()"
+                        on-submit="saveData(modified, onSuccess, onError)"
+                        form-data='data' 
+                        form-mode='form' 
+                        form-defs='config.formDefs'>
+                    </op-form>
+                </tab>
+                <tab ng-repeat="tab in config.detailTabs" 
+                    ng-init="tab.active=(section==tab.name)"
+                    active="tab.active" disabled="tab.disabled || !data.id">
+                    <tab-heading>
+                        {{ tab.label }}
+                        <span class="badge badge-info" ng-if="tab.badge">
+                            {{ data[tab.name].length || 0 }}
+                        </span>
+                    </tab-heading>
+                    <div ng-switch="tab.type">
+                        <section ng-switch-when="list">
+                            <div ng-include="tab.panel.templateUrl || 
+                                'views/galaxy/common/detail_list.html'">
+                            </div>
+                        </section>
+                        <section ng-switch-default>
+                            <div ng-include="tab.panel.templateUrl">
+                            </div>
+                        </section>
+                    </div>
+                </tab>
+            </tabset>
+        </div><!-- content -->
+    </div>
+</div>
+</div>

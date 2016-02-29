@@ -1,0 +1,33 @@
+<label class='filters' ng-repeat="label in labels">
+    <div class="btn-group">
+        <button class="btn btn-xs btn-info" type="button"
+            ng-click="filter(label.field)">
+            {{ label.text }}
+        </button>
+        <button class="btn btn-xs btn-info" type="button"
+            ng-click="remove(label)"
+            ><i class="fa fa-times"></i>
+        </button>
+    </div>
+</label>
+<span class='search'>
+    <div class="input-group">
+        <input type="text" placeholder="{{ placeholder || '请输入...'}}" class="form-control"
+            ng-model="query" ng-enter="search()"/>
+        <div class="input-group-btn" dropdown="">
+            <button tabindex="-1" class="btn btn-white" type="button"
+                ng-click="search()">搜索</button>
+            <button class="btn btn-white dropdown-toggle" 
+                dropdown-toggle="" type="button" 
+                aria-haspopup="true" aria-expanded="true">
+                <span class="caret"></span></button>
+            <ul class="dropdown-menu pull-right">
+                <li><a href="">Action</a></li>
+                <li><a href="">Another action</a></li>
+                <li><a href="">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="">Separated link</a></li>
+            </ul>
+        </div>
+    </div>
+</span>
