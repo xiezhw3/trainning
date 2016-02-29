@@ -28,7 +28,7 @@
 ```
 $ TAG=1.0 && bash scripts/run.sh [build|start|stop]
 ```
-这个启动文件会直接启动整个系统，如果需要直接控制某个子系统可以通过脚本 `docker-run.sh` 来进行。使用方式可以通过运行
+这个启动文件会直接启动整个系统，如果需要直接控制某个子系统可以通过脚本 `scripts/docker-run.sh` 来进行。使用方式可以通过运行
 ```
 $ bash scripts/docker-run.sh
 ```
