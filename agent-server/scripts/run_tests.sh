@@ -6,13 +6,6 @@ _cmd_exists() {
     which $1 &>/dev/null
 }
 
-_install_rsa() {
-    env LDFLAGS="-L$(brew --prefix openssl)/lib" \
-        CFLAGS="-I$(brew --prefix openssl)/include" \
-        SWIG_FEATURES="-cpperraswarn -includeall -I$(brew --prefix openssl)/include" \
-        pip install m2crypto
-}
-
 _install_deps() {
 
     if _cmd_exists brew
@@ -35,7 +28,6 @@ _install_deps() {
     fi
 
     pip install tox > /dev/null
-    _install_rsa
 }
 
 # 安装Tox
