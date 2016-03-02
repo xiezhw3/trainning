@@ -44,6 +44,3 @@ $ bash scripts/docker-run.sh
 url: [ip]:8080
 ```
 其中 `ip` 是跑 web 容器的机器的 ip
-
-## 说明
-另外在 `scripts` 下也提供了模块启停脚本，可以通过它来启动相应的容器。但是需要注意容器间的启动顺序。
