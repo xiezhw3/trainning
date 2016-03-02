@@ -10,49 +10,46 @@
     │   ├── __init__.py
     │   ├── __main__.py
     │   ├── api
-    │   │   ├── __init__.py
-    │   │   └── agent_api.py
     │   ├── modules
-    │   │   ├── __init__.py
-    │   │   ├── db_processor
-    │   │   │   ├── __init__.py
-    │   │   │   └── db_processor.py
-    │   │   ├── queue
-    │   │   │   ├── __init__.py
-    │   │   │   ├── consumer.py
-    │   │   │   └── producer.py
-    │   │   └── single_agent
-    │   │       ├── __init__.py
-    │   │       ├── agent.py
-    │   │       └── monitor.py
     │   └── utils
-    │       ├── __init__.py
-    │       ├── json_encoder.py
-    │       ├── status.py
-    │       └── url_requests.py
     ├── conf
     │   ├── __init__.py
     │   └── config.py
     ├── docs
     │   ├── README.md
+    │   ├── api文档.md
     │   ├── 第0阶段_预备知识总结.md
     │   ├── 第1阶段_单机agent.md
     │   ├── 第2阶段_单机agent_web.md
-    │   └── 第3阶段_多机agent.md
+    │   ├── 第3阶段_多机agent.md
+    │   └── 第4阶段_api文档.md
     ├── misc
     │   ├── compose
-    │   │   ├── docker-compose.dev.yml
-    │   │   └── docker-compose.yml
     │   ├── pip.conf
     │   ├── requirements.txt
     │   ├── sources.list
+    │   └── tox.ini
     ├── scripts
     │   ├── docker-run.sh
     │   ├── run.sh
     │   └── run_tests.sh
-    └── tests
-        ├── run.py
-        ├── test.sh
+    ├── tests
+    │   └── unit
+    └── var
+        └── report
+
+## 测试
+项目使用 pytest 进行单元测试的编写，提供了测试脚本 `scripts/run_test.sh` 进行执行测试。使用 pylint 进行代码风格检查，执行命令如下：
+```
+# 同时执行单元测试和代码静态检查
+$ bash scripts/run_tests.sh
+
+# 只进行单测
+$ bash scripts/run_tests.sh -e unit
+
+# 只进行代码静态检查
+$ bash scripts/run_tests.sh -e lint
+```
 
 ## 运行
 ### 物理机运行
@@ -102,6 +99,7 @@ $ chmod +x /usr/local/bin/docker-compose
 #### 运行方式
 在 agent-server 目录下运行如下命令：
 ```
+$ export WEB='path/to/agent-ui'
 $ TAG=1.0 && bash scripts/run.sh [build|start|stop]
 ```
 这个启动文件会直接启动整个系统，如果需要直接控制某个子系统可以通过脚本 `docker-run.sh` 来进行。使用方式可以通过运行

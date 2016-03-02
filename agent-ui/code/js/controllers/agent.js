@@ -181,6 +181,11 @@ function dashboardCtrl($scope, $q, $interval) {
 function machineInfoCtrl($scope, $q, $interval) {
     $scope.$parent.infoType = $scope.$state.current.data.type
     $scope.$parent.infoKeys = ['all']
+    if ($scope.$parent.displayIps.length > 0) {
+        // 进入新页面的时候保持提示条也数据显示信息的一致性
+        var disD = [$scope.$parent.displayIps[0]]
+        $scope.$parent.displayIps = disD
+    }
     $scope.stop()
     $scope.start()
 
@@ -195,7 +200,8 @@ function machineInfoCtrl($scope, $q, $interval) {
                     $scope.monitorInput[info_type] = []
                     $scope.monitorOutput[info_type] = []
                     angular.forEach(info_data[info_type+"_info"], function(value, type) {
-                        $scope.monitorInput[info_type].push({name: type, maker: info_type, ticked: false})
+                        $scope.monitorInput[info_type].push({name: type,
+                                                            maker: info_type, ticked: false})
                     });
                 }
             });
@@ -203,20 +209,21 @@ function machineInfoCtrl($scope, $q, $interval) {
         if ($scope.ips && utils.isEmpty($scope.ipListInput)) {
             $scope.ipListInput = []
             angular.forEach($scope.ips, function(ip) {
-               $scope.ipListInput.push({name: ip, maker: "", ticked: false}); // TODO 以后可加上机器名
+               $scope.ipListInput.push({name: ip, maker: "",
+                                       ticked: false}); // TODO 以后可加上机器名
             });
         }
     });
 
     $scope.monitorLang = {
-        selectAll: "Select all",
+        selectAll       : "Select all",
         selectNone      : "Select none",
         nothingSelected : "All monitor type",
         reset           : "Undo all",
         search          : "Type here to search...",
     }
     $scope.ipsLang = {
-        selectAll: "Select all",
+        selectAll       : "Select all",
         selectNone      : "Select none",
         nothingSelected : $scope.$parent.displayIps[0] || "No ip slected",
         reset           : "Undo all",
@@ -227,7 +234,8 @@ function machineInfoCtrl($scope, $q, $interval) {
         var infoKeys = []
         var displayIps = []
 
-        angular.forEach($scope.monitorOutput[$scope.$parent.infoType], function(choseItem) {
+        angular.forEach($scope.monitorOutput[$scope.$parent.infoType],
+                        function(choseItem) {
             infoKeys.push(choseItem.name)
         });
         angular.forEach($scope.ipListOutput, function(choseItem) {
@@ -241,7 +249,8 @@ function machineInfoCtrl($scope, $q, $interval) {
             $scope.$parent.infoKeys = ['all']
         if (utils.isEmpty($scope.$parent.displayIps) && $scope.ips)
             $scope.$parent.displayIps = [$scope.ips[0]]
-        $scope.loadCurrent($scope.$parent.displayIps, $scope.$parent.infoType, $scope.$parent.infoKeys)
+        $scope.loadCurrent($scope.$parent.displayIps,
+                           $scope.$parent.infoType, $scope.$parent.infoKeys)
     }
     
     $scope.selectAllOrNone = function(type) {
@@ -271,7 +280,7 @@ function machineInfoCtrl($scope, $q, $interval) {
     }
 
     $scope.chartTypes = {
-        options: ['line', 'spline', 'scatter', 'bar', 'column', 'areaspline', 'area', 'spline'],
+        options: ['line', 'scatter', 'bar', 'column', 'areaspline', 'area', 'spline'],
         selected: "line",
     }
     

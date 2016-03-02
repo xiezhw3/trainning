@@ -27,15 +27,16 @@ class Agent(object):
     def __init__(self):
         pass
 
-    def cpu_times(self, percpu=False):
-        '''获取系统各部分的 cpu 时间
+    def cpu_percent(self, percpu=False):
+        '''获取系统各部分的 cpu 时间百分比
+
         Args:
             percpu: 设置是否为每个逻辑 cpu 获取信息，Ture 表示为每个 cpu 单独
                 获取监控信息。False 表示直接获取系统 cpu 时间
 
         Returns:
             ret_code: 操作是否成功地状态码
-            cpu_times: 如果 percpu 设置为 True，返回一个 list，里面每个元素
+            cpu_percent: 如果 percpu 设置为 True，返回一个 list，里面每个元素
             是一个逻辑 cpu 的监控信息组成的字典，percpu 为 False 的时候直接返回
             一个字典。可通过键值对获得。
                 user: 用户态
@@ -48,19 +49,7 @@ class Agent(object):
                 steal: 虚拟化相关 (Linux 2.6.11+)
                 guest: 虚拟化相关 (Linux 2.6.24+)
                 guest_nice: 虚拟化相关 (Linux 3.2.0+)
-        '''
-        cpu_times = psutil.cpu_times(percpu=percpu)
-        if percpu:
-            for i in xrange(len(cpu_times)):
-                cpu_times[i] = cpu_times[i].__dict__
-        else:
-            cpu_times = cpu_times.__dict__
-        return (status.OK, cpu_times)
 
-    def cpu_percent(self, percpu=False):
-        '''获取系统各部分的 cpu 时间百分比
-
-        参数和返回值和 self.cpu_times 一致（单位换为百分比）
         '''
         cpu_percent = psutil.cpu_times_percent(percpu=percpu)
         if percpu:

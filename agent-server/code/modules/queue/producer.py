@@ -34,7 +34,7 @@ class Producer(object):
 
     def produce(self, message):
         '''将消息插入到队列'''
-        if isinstance(self, dict):
+        if isinstance(message, dict):
             message = json.dumps(message)
 
         self.channel.basic_publish(exchange=config.RABBITMQ_EXCHANGE,

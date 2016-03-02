@@ -4,7 +4,7 @@
 import time
 
 
-def time_stand(ts):
+def time_stand(ts=None):
     '''时区处理'''
     if not ts:
         ts = time.time()

@@ -113,7 +113,7 @@ def consumer():
         sys.exit(1)
 
 
-if __name__ == '__main__':
+def run():
     arguments = docopt(__doc__, version='1.0.0')
     if sys.argv[1] == 'server':
         if arguments['TTL']:
@@ -123,3 +123,6 @@ if __name__ == '__main__':
         api()
     else:
         consumer()
+
+if __name__ == '__main__':
+    run()
